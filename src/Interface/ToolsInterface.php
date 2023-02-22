@@ -1,5 +1,5 @@
 <?php
-namespace Abrahamghaemi\PowerElectronicsCalculatorsAndTools\Interface;
+namespace Edison\Interface;
 interface ToolsInterface
 {
 

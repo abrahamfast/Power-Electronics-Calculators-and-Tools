@@ -1,6 +1,6 @@
 <?php 
 
 return [
-	new \Abrahamghaemi\PowerElectronicsCalculatorsAndTools\Console\ElectricalCapacitorLifeCalculatorCommand(),
+	new \Edison\Console\ElectricalCapacitorLifeCalculatorCommand(),
 	// append more command here
 ];

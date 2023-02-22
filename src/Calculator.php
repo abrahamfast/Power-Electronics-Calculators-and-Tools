@@ -1,5 +1,5 @@
 <?php  
-namespace Abrahamghaemi\PowerElectronicsCalculatorsAndTools;
+namespace Edison;
 
 class Calculator
 {

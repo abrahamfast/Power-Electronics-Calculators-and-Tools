@@ -1,8 +1,8 @@
 <?php 
 
-namespace Abrahamghaemi\PowerElectronicsCalculatorsAndTools\Tools;
+namespace Edison\Tools;
 
-use Abrahamghaemi\PowerElectronicsCalculatorsAndTools\Interface\ToolsInterface;
+use Edison\Interface\ToolsInterface;
 
 class ElectricalCapacitorLifeCalculator implements ToolsInterface
 {
