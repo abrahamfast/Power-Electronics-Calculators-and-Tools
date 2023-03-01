@@ -1,5 +1,5 @@
 <?php  
-namespace Edison;
+namespace App;
 
 class Calculator
 {

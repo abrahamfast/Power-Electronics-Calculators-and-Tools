@@ -1,6 +1,6 @@
 <?php 
 
 return [
-	new \Edison\Console\ElectricalCapacitorLifeCalculatorCommand(),
+	new \App\Console\ToolsListCommand(),
 	// append more command here
 ];

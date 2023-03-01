@@ -10,7 +10,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Edison\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [

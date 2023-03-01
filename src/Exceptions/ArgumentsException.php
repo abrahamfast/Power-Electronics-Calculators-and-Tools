@@ -1,6 +1,6 @@
 <?php 
 
-namespace Abrahamghaemi\PowerElectronicsCalculatorsAndTools\Exceptions;
+namespace App\Exceptions;
 
 class ArgumentsException extends \Exception
 {

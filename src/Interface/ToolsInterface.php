@@ -1,6 +1,6 @@
 <?php
-namespace Edison\Interface;
+namespace App\Interface;
 interface ToolsInterface
 {
-
+public function calculate();
 }
