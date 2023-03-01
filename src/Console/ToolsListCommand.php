@@ -23,68 +23,36 @@ class ToolsListCommand extends Command
 	 protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $helper = $this->getHelper('question');
+
+
+
         $question = new ChoiceQuestion(
-            'Please select: ',
-            // choices can also be PHP objects that implement __toString() method
+            'Please select your tools',
             ['ElectricalCapacitorLifeCalculator'],
-            0
+            '0,1'
         );
+
 
         $calculatorTool = $helper->ask($input, $output, $question);
 
 //        $question->setErrorMessage('Color %s is invalid.');
 //        $output->writeln('You have just selected: '.$color);
 
+
+
         if ($calculatorTool == 'ElectricalCapacitorLifeCalculator'){
-            $questionLoadLifeRating = new Question('Enter Load Life Rating:');
-            $questionLoadLifeRating->setValidator(function($answer){
-                if (!is_float($answer)){
-                    throw new \RuntimeException(
-                        'Load Life Rating should be float'
-                    );
-                }
-
-                return $answer;
-
-            });
-
-
-            $questionMaximumVoltageRatingCapacitor = new Question('Enter Maximum voltage rating of capacitor:');
-            $questionMaximumVoltageRatingCapacitor->setValidator(function ($answer) {
-                if ($answer>2) {
-                    throw new \RuntimeException(
-                        'Enter Maximum voltage rating of capacitor should be equal or less than 2'
-                    );
-                }
-
-                return $answer;
-            });
-            $question->setMaxAttempts(2);
-            $questionOperatingVoltageApplication = new Question('Enter Operating voltage of application:');
-            $questionMaximumTempratingCapacitor = new Question('Enter Maximum temp rating of capacitor:');
-            $questionAmbientTemperature = new Question('Enter Ambient Temperature:');
-
-            // if the users inputs 'elsa ' it will not be trimmed and you will get 'elsa ' as value
-            $loadLifeRating = $helper->ask($input, $output, $questionLoadLifeRating);
-            $maximumVoltageRatingCapacitor = $helper->ask($input, $output, $questionMaximumVoltageRatingCapacitor);
-            $operatingVoltageApplication = $helper->ask($input, $output, $questionOperatingVoltageApplication);
-            $maximumTempratingCapacitor = $helper->ask($input, $output, $questionMaximumTempratingCapacitor);
-            $ambientTemperature = $helper->ask($input, $output, $questionAmbientTemperature);
-            var_dump($loadLifeRating, $maximumTempratingCapacitor, $operatingVoltageApplication, $maximumVoltageRatingCapacitor, $ambientTemperature);
+            $electricalCapacitorLifeCalculator = new ElectricalCapacitorLifeCalculator;
+            $questions = $electricalCapacitorLifeCalculator->getQuestions();
+            foreach ($questions as $key => $question) {
+                @$electricalCapacitorLifeCalculator->{$key} = $helper->ask($input, $output, $question);
+            }
+            $result = $electricalCapacitorLifeCalculator->calculate();
+            $output->writeln('Projected Life at Operating Conditions (L2) Is : ' . $result);
             die;
         }
 
-        $question = new Question('What is the name of the child?');
-        $question->setTrimmable(false);
-        // if the users inputs 'elsa ' it will not be trimmed and you will get 'elsa ' as value
-        $name = $helper->ask($input, $output, $question);
-        die;
 
 
-    	$electricalCapacitorLifeCalculator = new ElectricalCapacitorLifeCalculator;
-    	$electricalCapacitorLifeCalculator->setMaximumVoltageRatingCapacitor($input->getArgument('maximumVoltageRatingCapacitor'));
-    	$electricalCapacitorLifeCalculator->setLoadLifeRating($input->getArgument('loadLifeRating'));
-        $electricalCapacitorLifeCalculator->calculate();
     	// input
     	// validation
     	// math
@@ -98,7 +66,6 @@ class ToolsListCommand extends Command
 
         // return this if there was no problem running the command
         // (it's equivalent to returning int(0))
-        echo "iam running";
         return Command::SUCCESS;
 
         // or return this if some error happened during the execution
